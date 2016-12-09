@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import base64
-from time import sleep
+from time import sleep, time
 import paho.mqtt.client as mqtt
 import random, string
 import math
@@ -35,9 +35,10 @@ def publishEncodedImage(encoded):
     picId = randomword(8)
     pos = 0
     no_of_packets = math.ceil(length/packet_size)
+    timestamp = time()
 
     while start <= len(encoded):            
-        data = {"data": encoded[start:end], "pic_id":picId, "pos": pos, "size": no_of_packets}
+        data = {"data": encoded[start:end], "pic_id":picId, "pos": pos, "size": no_of_packets, "time": timestamp}
         mqttc.publish("Image-Data",json.JSONEncoder().encode(data))
         end += packet_size
         start += packet_size

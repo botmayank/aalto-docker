@@ -5,6 +5,7 @@ import base64
 import numpy as np
 import scipy
 from scipy import ndimage
+from time import time
 
 picture  = []
 count = 0
@@ -38,6 +39,9 @@ def on_message(mqttc, obj, msg):
         if count == 0:           
             print "Received full image"
             processImage(''.join(picture))
+            rec_time = time()
+            send_time = part['time']
+            print "Round trip time in seconds: " + str(rec_time - send_time)
             print "Output image saved as sobel.jpg"
 
 def on_publish(mqttc, obj, mid):

@@ -12,3 +12,9 @@ To run the publisher, run
 
 To run the subscriber, run
 `docker run -t <name_of_image>`
+
+To check filesystem of running docker
+`sudo docker exec -t -i 2c743a138817 /bin/bash`
+
+To copy file from running docker
+`sudo docker cp <container id>:/sobel.jpg /dest/path`
